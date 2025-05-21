@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import Navbar from "@/layouts/navbar";
 import Footer from "@/layouts/Footer";
 import { CartProvider } from "@/context/cart-context";
+import { CartDrawer } from "@/components/cart-drawer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,6 +37,7 @@ export default function PublicLayout({
       <div className="min-h-screen flex flex-col ">
         <Navbar />
         <div className="flex-1">{children}</div>
+        <CartDrawer />
         <Footer />
         <Toaster position="bottom-right" />
       </div>

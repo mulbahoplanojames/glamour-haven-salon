@@ -29,7 +29,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <Card>
+              <Card className="border-primary">
                 <CardHeader>
                   <CardTitle>Send Us a Message</CardTitle>
                   <CardDescription>

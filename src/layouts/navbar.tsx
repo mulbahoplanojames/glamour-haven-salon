@@ -115,10 +115,7 @@ export default function Navbar() {
                   exit={{ scale: 0 }}
                   className="absolute -top-2 -right-2"
                 >
-                  <Badge
-                    variant="destructive"
-                    className="h-5 w-5 p-0 flex items-center justify-center rounded-full"
-                  >
+                  <Badge className="h-5 w-5 p-0 flex items-center justify-center rounded-full">
                     {cartItemCount}
                   </Badge>
                 </motion.div>
