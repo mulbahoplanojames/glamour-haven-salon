@@ -150,7 +150,7 @@ export default function Footer() {
 
         <div className="border-t border-border mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()}Prince Salon. All rights reserved.
+            &copy; {new Date().getFullYear()}Glamour Salon. All rights reserved.
           </p>
           <div className="mt-4 sm:mt-0 flex space-x-6">
             <Link
