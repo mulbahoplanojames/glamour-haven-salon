@@ -56,14 +56,14 @@ const HomeHero = () => {
                   size="lg"
                   className="bg-primary text-white hover:bg-primary/90 dark:text-black"
                 >
-                  <Link href="/quizzes">Start Learning Now</Link>
+                  <Link href="/booking">Book Appointment</Link>
                 </Button>
                 <Button
                   asChild
                   size="lg"
                   className=" text-primary hover:bg-white/80 bg-white dark:bg-neutral-900 dark:text-white"
                 >
-                  <Link href="#how-it-works">How It Works</Link>
+                  <Link href="/services">Explore Services</Link>
                 </Button>
               </div>
               <div className="flex items-center gap-4 text-sm">
@@ -89,8 +89,8 @@ const HomeHero = () => {
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-2xl hidden lg:block">
               <div className="absolute inset-0 bg-gradient-to-br from-black/40 to-black/10 z-10 rounded-lg"></div>
               <Image
-                src="/ab2.jpg"
-                alt="EduQuiz Pro Platform"
+                src="/bridal.jpg"
+                alt="Bridal Hair and Makeup"
                 fill
                 className="object-cover"
               />

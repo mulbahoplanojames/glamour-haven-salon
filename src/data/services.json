@@ -1,0 +1,84 @@
+[
+  {
+    "id": "1",
+    "name": "Haircut & Styling",
+    "slug": "haircut-and-styling",
+    "category": "Haircuts",
+    "description": "A precision haircut tailored to your face shape and style preferences, followed by professional styling. Our expert stylists will consult with you to understand your desired look and provide recommendations based on your hair type and lifestyle.",
+    "shortDescription": "Precision cut and professional styling",
+    "price": 65,
+    "duration": 60,
+    "featured": true,
+    "image": "/haircult.jpg",
+    "details": [
+      {
+        "id": "1",
+        "label": "We are ready to give you a haircut"
+      },
+      {
+        "id": "2",
+        "label": "We are ready to give you a haircut"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "name": "Color Treatment",
+    "slug": "color-treatment",
+    "category": "Coloring",
+    "description": "Full color treatment using premium products for vibrant, long-lasting results. Whether you're looking to cover grays, try a bold new shade, or enhance your natural color, our color specialists will create a custom formula just for you.",
+    "shortDescription": "Vibrant, long-lasting color",
+    "price": 120,
+    "duration": 120,
+    "featured": true,
+    "image": "/bg_4.jpg"
+  },
+  {
+    "id": "3",
+    "name": "Highlights & Balayage",
+    "slug": "highlights-and-balayage",
+    "category": "Coloring",
+    "description": "Add dimension and depth to your hair with our highlighting and balayage services. Our stylists are trained in the latest techniques to create natural-looking, sun-kissed results that enhance your features and complement your skin tone.",
+    "shortDescription": "Dimensional, natural-looking highlights",
+    "price": 150,
+    "duration": 150,
+    "featured": true,
+    "image": "/balayage.jpg"
+  },
+  {
+    "id": "4",
+    "name": "Keratin Treatment",
+    "slug": "keratin-treatment",
+    "category": "Treatments",
+    "description": "Smooth, frizz-free hair that lasts for months with our premium keratin treatments. This service reduces frizz, enhances shine, and makes styling easier while maintaining your hair's natural movement and body.",
+    "shortDescription": "Long-lasting frizz control",
+    "price": 200,
+    "duration": 180,
+    "featured": false,
+    "image": "/keratin.jpg"
+  },
+  {
+    "id": "5",
+    "name": "Deep Conditioning",
+    "slug": "deep-conditioning",
+    "category": "Treatments",
+    "description": "Restore moisture and vitality to dry, damaged hair with our intensive conditioning treatments. Using high-quality, professional-grade products, we'll help repair damage, strengthen strands, and improve overall hair health.",
+    "shortDescription": "Intensive moisture and repair",
+    "price": 45,
+    "duration": 45,
+    "featured": false,
+    "image": "/conditioning.jpg"
+  },
+  {
+    "id": "6",
+    "name": "Bridal Hair",
+    "slug": "bridal-hair",
+    "category": "Styling",
+    "description": "Look your best on your special day with our bridal hair styling services. Includes a consultation, trial run, and day-of styling to ensure your hair is perfect for your wedding day. We work with you to create a look that complements your dress, veil, and overall wedding aesthetic.",
+    "shortDescription": "Special occasion styling",
+    "price": 150,
+    "duration": 90,
+    "featured": false,
+    "image": "/bridal.jpg"
+  }
+]
