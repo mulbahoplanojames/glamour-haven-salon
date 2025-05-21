@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
           <div>
-            <h3 className="text-lg font-semibold mb-4">Linda Salon</h3>
+            <h3 className="text-lg font-semibold mb-4">Glamour Salon</h3>
             <p className="text-muted-foreground">
               Premium hair salon services with expert stylists dedicated to
               making you look and feel your best.

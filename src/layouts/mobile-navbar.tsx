@@ -38,7 +38,7 @@ export function MobileNavbar() {
             <SheetClose asChild>
               <Link href="/" className="-m-1.5 p-1.5 text-xl font-bold">
                 <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                  Elegance
+                  Glamour
                 </span>
                 <span>Salon</span>
               </Link>
