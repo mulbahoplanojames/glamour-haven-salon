@@ -12,7 +12,7 @@ import ContactForm from "@/components/contact/contact-form";
 import ContactFAQ from "@/components/contact/contact-faq";
 
 export const metadata = {
-  title: "Contact Us -Prince Hair Salon",
+  title: "Contact Us - Glamour Hair Salon",
   description: "Get in touch with our team for inquiries or support",
 };
 

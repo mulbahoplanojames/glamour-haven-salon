@@ -272,11 +272,11 @@ export default function CheckoutPage() {
                     className="space-y-6"
                   >
                     <div>
+                      π
                       <h3 className="text-lg font-medium mb-4 flex items-center">
                         <Truck className="mr-2 h-5 w-5" />
                         Shipping Information
                       </h3>
-
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
