@@ -33,7 +33,7 @@ export default function PublicLayout({
 }>) {
   return (
     <CartProvider>
-      <div className="min-h-screen flex flex-col space-y-4">
+      <div className="min-h-screen flex flex-col ">
         <Navbar />
         <div className="flex-1">{children}</div>
         <Footer />

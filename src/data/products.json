@@ -1,0 +1,177 @@
+[
+  {
+    "id": "1",
+    "name": "Hydrating Shampoo",
+    "brand": "Linda",
+    "category": "Shampoo",
+    "description": "A gentle, hydrating shampoo that cleanses while adding moisture to dry or damaged hair. Infused with argan oil and aloe vera for maximum hydration.",
+    "price": 24.99,
+    "rating": 4.8,
+    "unit": 23,
+    "featured": true,
+    "image": "/hydratingshampoo.jpg",
+    "images": [
+      "/hydratingshampoo.jpg",
+      "/hydratingshampoo.jpg",
+      "/hydratingshampoo.jpg",
+      "/hydratingshampoo.jpg"
+    ],
+    "sizes": ["5.6", "7", "11", "17", "22"],
+    "colors": ["orange", "brown", "black"],
+    "features": [
+      "Lightweight water-resistant fabric",
+      "Reflective details for visibility",
+      "Ventilation panels for breathability",
+      "Zippered pockets for secure storage",
+      "Adjustable hood and cuffs"
+    ],
+    "badge": {
+      "text": "Just Arrived",
+      "color": "bg-blue-500"
+    }
+  },
+  {
+    "id": "2",
+    "name": "Volumizing Conditioner",
+    "brand": "Elegance",
+    "category": "Conditioner",
+    "description": "Add body and bounce to fine or limp hair with this lightweight conditioner that detangles without weighing hair down.",
+    "price": 26.99,
+    "rating": 4.7,
+    "unit": 23,
+    "featured": true,
+    "image": "/volumizingconditioner.jpg",
+    "images": [
+      "/volumizingconditioner.jpg",
+      "/volumizingconditioner.jpg",
+      "/volumizingconditioner.jpg",
+      "/volumizingconditioner.jpg"
+    ],
+    "features": [
+      "Breathable mesh fabric for maximum airflow",
+      "Stretchy design for a full range of motion",
+      "Fast-drying material to keep you cool and dry",
+      "Sleeveless design for added freedom of movement",
+      "Ideal for gym sessions, running, or high-intensity activities"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["yellow", "green", "lightblue", "black", "purple"],
+    "badge": {
+      "text": "Limited Time",
+      "color": "bg-blue-500"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Repair Hair Mask",
+    "brand": "Elegance",
+    "category": "Treatments",
+    "description": "An intensive weekly treatment that repairs damaged hair, restores elasticity, and adds shine. Perfect for color-treated or heat-styled hair.",
+    "price": 32.99,
+    "rating": 4.9,
+    "unit": 23,
+    "featured": true,
+    "image": "/repairhairmask.jpg",
+    "images": [
+      "/repairhairmask.jpg",
+      "/repairhairmask.jpg",
+      "/repairhairmask.jpg",
+      "/repairhairmask.jpg"
+    ],
+    "features": [
+      "Breathable mesh fabric for maximum airflow",
+      "Stretchy design for a full range of motion",
+      "Fast-drying material to keep you cool and dry",
+      "Sleeveless design for added freedom of movement",
+      "Ideal for gym sessions, running, or high-intensity activities"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["yellow", "green", "lightblue", "black", "purple"],
+    "badge": {
+      "text": "Best Seller",
+      "color": "bg-pink-500"
+    }
+  },
+  {
+    "id": "4",
+    "name": "Human Hair ",
+    "brand": "Linda",
+    "category": "Hair",
+    "description": "An intensive weekly treatment that repairs damaged hair, restores elasticity, and adds shine. Perfect for color-treated or heat-styled hair.",
+    "price": 20.99,
+    "rating": 3.9,
+    "unit": 23,
+    "featured": true,
+    "image": "/hair1.jpg",
+    "images": ["/hair1.jpg", "/hair1.jpg", "/hair1.jpg", "/hair1.jpg"],
+    "features": [
+      "Breathable mesh fabric for maximum airflow",
+      "Stretchy design for a full range of motion",
+      "Fast-drying material to keep you cool and dry",
+      "Sleeveless design for added freedom of movement",
+      "Ideal for gym sessions, running, or high-intensity activities"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["yellow", "green", "lightblue", "black", "purple"],
+    "badge": {
+      "text": "Limited Time",
+      "color": "bg-blue-500"
+    }
+  },
+  {
+    "id": "5",
+    "name": "Brizle Human Hair ",
+    "brand": "Linda",
+    "category": "Hair",
+    "description": "An intensive weekly treatment that repairs damaged hair, restores elasticity, and adds shine. Perfect for color-treated or heat-styled hair.",
+    "price": 32.99,
+    "rating": 4.9,
+    "unit": 23,
+    "featured": true,
+    "image": "/nikkismithhair.jpg",
+    "images": [
+      "/nikkismithhair.jpg",
+      "/nikkismithhair.jpg",
+      "/nikkismithhair.jpg"
+    ],
+    "features": [
+      "Breathable mesh fabric for maximum airflow",
+      "Stretchy design for a full range of motion",
+      "Fast-drying material to keep you cool and dry",
+      "Sleeveless design for added freedom of movement",
+      "Ideal for gym sessions, running, or high-intensity activities"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["yellow", "green", "lightblue", "black", "purple"],
+    "badge": {
+      "text": "Limited Time",
+      "color": "bg-blue-500"
+    }
+  },
+  {
+    "id": "6",
+    "name": "Bone Stright Hair ",
+    "brand": "Linda",
+    "category": "Hair",
+    "description": "An intensive weekly treatment that repairs damaged hair, restores elasticity, and adds shine. Perfect for color-treated or heat-styled hair.",
+    "price": 32.99,
+    "rating": 4.9,
+    "unit": 23,
+    "featured": true,
+    "image": "/hair2.jpg",
+    "images": ["/hair2.jpg", "/hair2.jpg", "/hair2.jpg"],
+    "features": [
+      "Breathable mesh fabric for maximum airflow",
+      "Stretchy design for a full range of motion",
+      "Fast-drying material to keep you cool and dry",
+      "Sleeveless design for added freedom of movement",
+      "Ideal for gym sessions, running, or high-intensity activities"
+    ],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "colors": ["yellow", "green", "lightblue", "black", "purple"],
+    "badge": {
+      "text": "Best Seller",
+      "color": "bg-pink-500"
+    }
+  }
+]

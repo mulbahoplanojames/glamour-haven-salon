@@ -40,7 +40,7 @@ const WhyChooseUs = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection direction="up" className="text-center mb-12">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
-            Why Choose <AnimatedGradientText text="Linda Salon" />
+            Why Choose <AnimatedGradientText text="Glamour Haven Salon" />
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             We&apos;re committed to providing an exceptional experience from the

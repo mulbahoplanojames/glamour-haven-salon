@@ -11,13 +11,13 @@ const AboutUs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <AnimatedSection direction="left" delay={0.2}>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
-              About <AnimatedGradientText text="Linda Salon" />
+              About <AnimatedGradientText text="Glamour Haven Salon" />
             </h2>
             <p className="text-lg text-muted-foreground mb-6">
-              Founded in 2010,Prince Salon has been providing premium hair care
-              services with a focus on personalized attention and exceptional
-              results. Our team of skilled stylists is dedicated to helping you
-              look and feel your best.
+              Founded in 2025,Glamour Haven Salon has been providing premium
+              hair care services with a focus on personalized attention and
+              exceptional results. Our team of skilled stylists is dedicated to
+              helping you look and feel your best.
             </p>
             <p className="text-lg text-muted-foreground mb-6">
               We believe that great hair starts with understanding your unique
