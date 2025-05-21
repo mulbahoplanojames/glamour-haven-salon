@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { BackgroundBeamsWithCollision } from "../ui/background-beams-with-collision";
 
 const users = [
   {
@@ -29,33 +30,38 @@ const users = [
 const HomeHero = () => {
   return (
     <>
-      <section className="relative bg-gradient-to-r from-primary/90 to-primary py-20 text-white overflow-hidden ">
+      <BackgroundBeamsWithCollision>
         <div className="absolute inset-0 bg-grid-white/10  [mask-image:linear-gradient(to_bottom,transparent,black)] dark:bg-black"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-              <div className="inline-block px-3 py-1 rounded-full bg-white/20 text-sm font-medium backdrop-blur-sm">
+              <div className="inline-block px-3 py-1 ring-2 ring-primary rounded-full bg-white/20 text-sm font-medium backdrop-blur-sm">
                 The Ultimate Learning Experience
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Master New Skills with Interactive Courses & Quizzes
+              <h1 className="text-4xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+                Unleash Your Inner Glow with Personalized Styles and Luxurious
+                Care at Glamour Haven
               </h1>
-              <p className="text-lg md:text-xl text-white/80 max-w-xl">
-                AMOA combines interactive learning, real-time coding challenges,
-                and gamification to make learning engaging and effective.
+              <p className="text-lg md:text-base  max-w-xl">
+                At Glamour Haven, we believe beauty is personal — and your style
+                should be too. From precision cuts and vibrant color to flawless
+                makeup and rejuvenating treatments, our expert stylists are here
+                to bring your vision to life. Step into a relaxing, luxurious
+                space where creativity meets care, and leave feeling confident,
+                refreshed, and unapologetically you.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button
                   asChild
                   size="lg"
-                  className="bg-white text-primary hover:bg-white/90 dark:text-black"
+                  className="bg-primary text-white hover:bg-primary/90 dark:text-black"
                 >
                   <Link href="/quizzes">Start Learning Now</Link>
                 </Button>
                 <Button
                   asChild
                   size="lg"
-                  className=" text-white hover:bg-primary-clr/80 bg-primary-clr"
+                  className=" text-primary hover:bg-white/80 bg-white dark:bg-neutral-900 dark:text-white"
                 >
                   <Link href="#how-it-works">How It Works</Link>
                 </Button>
@@ -77,7 +83,7 @@ const HomeHero = () => {
                     </div>
                   ))}
                 </div>
-                <span className="text-white/80">Join 50+ learners today</span>
+                <span>Join 50+ learners today</span>
               </div>
             </div>
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-2xl hidden lg:block">
@@ -91,7 +97,7 @@ const HomeHero = () => {
             </div>
           </div>
         </div>
-      </section>
+      </BackgroundBeamsWithCollision>
     </>
   );
 };

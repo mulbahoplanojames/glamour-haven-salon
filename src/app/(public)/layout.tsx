@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
 import { Toaster } from "sonner";
+import Navbar from "@/layouts/navbar";
+import Footer from "@/layouts/Footer";
+import { CartProvider } from "@/context/cart-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,9 +32,13 @@ export default function PublicLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen flex flex-col space-y-4">
-      <div className="flex-1">{children}</div>
-      <Toaster position="bottom-right" />
-    </div>
+    <CartProvider>
+      <div className="min-h-screen flex flex-col space-y-4">
+        <Navbar />
+        <div className="flex-1">{children}</div>
+        <Footer />
+        <Toaster position="bottom-right" />
+      </div>
+    </CartProvider>
   );
 }
