@@ -36,7 +36,6 @@ const Services = () => {
             your unique needs and preferences. From classic cuts to the latest
             color trends, our expert stylists are here to help you look and feel
             your best."
-        image="/bg_3.jpg"
       />
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

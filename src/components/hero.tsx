@@ -1,13 +1,11 @@
-import Image from "next/image";
 import { HeroBackgroundBeamsWithCollision } from "./ui/hero-background-beams-with-collision";
 
 interface HeroProps {
   title: string;
   description: string;
-  image: string;
 }
 
-const Hero = ({ title, description, image }: HeroProps) => {
+const Hero = ({ title, description }: HeroProps) => {
   return (
     <HeroBackgroundBeamsWithCollision>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10 relative">

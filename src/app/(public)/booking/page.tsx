@@ -23,7 +23,6 @@ export default function BookingPage() {
         title="Book Your Appointment"
         description="  Schedule your next visit with our expert stylists. Choose your
               preferred service, stylist, and time."
-        image="/bg_1.jpg"
       />
 
       {/* Booking Form Section */}

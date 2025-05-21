@@ -17,12 +17,13 @@ export const BackgroundBeamsWithCollision = ({
     null
   ) as React.RefObject<HTMLDivElement>;
 
-  const beams = Array.from({ length: 30 }, (_, i) => {
+  const beams = Array.from({ length: 30 }, (_) => {
     const baseX = Math.floor(Math.random() * 1400); // Spread randomly across horizontal space (0–1400)
     const translateOffset = Math.floor(Math.random() * 100 - 50); // Translate slightly left/right (-50 to +50)
     const duration = +(Math.random() * 6 + 2).toFixed(1); // 2 to 8 seconds
     const repeatDelay = +(Math.random() * 5 + 1).toFixed(1); // 1 to 6 seconds
     const delay = +(Math.random() * 5).toFixed(1); // 0 to 5 seconds
+    console.log(_, "baseX");
     const heightClasses = [
       "h-2",
       "h-4",
@@ -99,7 +100,7 @@ const CollisionMechanism = React.forwardRef<
       repeatDelay?: number;
     };
   }
->(({ parentRef, containerRef, beamOptions = {} }, ref) => {
+>(({ parentRef, containerRef, beamOptions = {} }) => {
   const beamRef = useRef<HTMLDivElement>(null);
   const [collision, setCollision] = useState<{
     detected: boolean;

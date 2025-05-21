@@ -22,8 +22,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
 import { motion } from "framer-motion";
 import { Product } from "@/types/product-type";
 import products from "@/data/products.json";
@@ -146,7 +144,6 @@ export default function ProductsPage() {
         title="Shop Our Products"
         description="Discover our premium hair care products, specially selected by our
               stylists to help you maintain salon-quality hair at home."
-        image="/bg_1.jpg"
       />
 
       {/* Products Section */}

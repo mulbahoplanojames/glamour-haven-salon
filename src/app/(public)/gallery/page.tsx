@@ -36,7 +36,6 @@ export default function GalleryPage() {
         description="Browse through our portfolio of transformations and get inspired
               for your next visit. Our skilled stylists have created these
               stunning looks for our satisfied clients."
-        image="/bg_1.jpg"
       />
 
       {/* Gallery Section */}
