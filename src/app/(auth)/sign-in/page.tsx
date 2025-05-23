@@ -19,6 +19,7 @@ import { useState } from "react";
 import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
+import { Home } from "lucide-react";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -85,13 +86,18 @@ export default function LoginPage() {
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="p-6 md:p-8"
                 >
+                  <Button asChild>
+                    <Link href="/" className="mb-4 animate-bounce">
+                      <Home />
+                    </Link>
+                  </Button>
                   <div className="flex flex-col gap-6">
-                    <div className="flex flex-col items-center text-center">
+                    <div className="flex flex-col ">
                       <h1 className="text-2xl font-bold">
-                        Create Your Account
+                        Welcome back to Glamour Haven
                       </h1>
-                      <p className="text-balance text-muted-foreground">
-                        Create your account with Glamour Haven
+                      <p className="pt-2 text-muted-foreground">
+                        Please enter your email and password to sign in.
                       </p>
                     </div>
 
