@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "../globals.css";
-import { Toaster } from "sonner";
 import Navbar from "@/layouts/navbar";
 import Footer from "@/layouts/Footer";
 import { CartProvider } from "@/context/cart-context";
@@ -28,7 +27,6 @@ export default function PublicLayout({
         <div className="flex-1">{children}</div>
         <CartDrawer />
         <Footer />
-        <Toaster position="bottom-right" />
       </div>
     </CartProvider>
   );

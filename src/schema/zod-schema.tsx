@@ -39,3 +39,27 @@ export const checkoutFormSchema = z.object({
   cardCvc: z.string().optional(),
   notes: z.string().optional(),
 });
+
+export const signUpFormSchema = z.object({
+  email: z.string().email(),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" })
+    .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$/, {
+      message: "Password must include letters, numbers, and symbols",
+    }),
+  phone: z
+    .string()
+    .min(10, { message: "Phone number must be at least 10 digits" }),
+  fullName: z.string().min(1, { message: "Full name is required" }),
+});
+
+export const signInFormSchema = z.object({
+  email: z.string().email({ message: "Please enter a valid email address" }),
+  password: z
+    .string()
+    .min(8, { message: "Password must be at least 8 characters" })
+    .regex(/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).+$/, {
+      message: "Password must include letters, numbers, and symbols",
+    }),
+});
