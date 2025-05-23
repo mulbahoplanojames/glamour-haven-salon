@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 
 import { NavMain } from "@/components/admin/layout/nav-main";
-import { NavProjects } from "@/components/admin/layout/nav-projects";
 import { NavUser } from "@/components/admin/layout/nav-user";
 import {
   Sidebar,
@@ -43,18 +42,18 @@ const data = {
     },
     {
       title: "Products",
-      url: "#",
+      url: "/admin/products",
       icon: Package,
       isActive: true,
       items: [
         {
           title: "All Products",
-          url: "#",
+          url: "/admin/products",
           icon: List,
         },
         {
           title: "Add Product",
-          url: "#",
+          url: "/admin/products/new",
           icon: Plus,
         },
       ],
@@ -79,7 +78,7 @@ const data = {
     },
     {
       title: "Users",
-      url: "#",
+      url: "/admin/users",
       icon: User,
     },
     {

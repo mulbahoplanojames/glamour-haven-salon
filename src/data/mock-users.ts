@@ -1,0 +1,48 @@
+// Mock data - in a real app, this would come from your API
+export const mockUsers = [
+  {
+    id: "1",
+    name: "Sarah Johnson",
+    email: "sarah.j@example.com",
+    role: "customer",
+    status: "active",
+    joinDate: "2023-01-15",
+    avatar: "/placeholder.svg?height=40&width=40",
+  },
+  {
+    id: "2",
+    name: "Michael Chen",
+    email: "michael.c@example.com",
+    role: "customer",
+    status: "active",
+    joinDate: "2023-02-22",
+    avatar: "/placeholder.svg?height=40&width=40",
+  },
+  {
+    id: "3",
+    name: "Jessica Williams",
+    email: "jessica.w@example.com",
+    role: "admin",
+    status: "active",
+    joinDate: "2022-11-05",
+    avatar: "/placeholder.svg?height=40&width=40",
+  },
+  {
+    id: "4",
+    name: "David Rodriguez",
+    email: "david.r@example.com",
+    role: "stylist",
+    status: "active",
+    joinDate: "2023-03-10",
+    avatar: "/placeholder.svg?height=40&width=40",
+  },
+  {
+    id: "5",
+    name: "Emma Thompson",
+    email: "emma.t@example.com",
+    role: "customer",
+    status: "inactive",
+    joinDate: "2023-01-30",
+    avatar: "/placeholder.svg?height=40&width=40",
+  },
+];

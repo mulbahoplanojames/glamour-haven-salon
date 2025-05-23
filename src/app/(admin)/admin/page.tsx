@@ -41,7 +41,7 @@ export default function AdminHome() {
           Dashboard
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mt-1">
-          Welcome back! Here's what's happening at your salon.
+          Welcome back! Here&apos;s what&apos;s happening at your salon.
         </p>
       </div>
       <AdminStats />
