@@ -109,10 +109,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton
               size="lg"
               asChild
-              className="bg-slate-100 hover:bg-slate-200"
+              className="bg-slate-100 dark:bg-transparent hover:bg-slate-200"
             >
               <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary dark:bg-amber-600 text-sidebar-primary-foreground">
                   <Brush className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
