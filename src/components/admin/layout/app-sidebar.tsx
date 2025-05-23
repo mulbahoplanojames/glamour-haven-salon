@@ -2,16 +2,16 @@
 
 import * as React from "react";
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
-  Frame,
+  Brush,
+  Calendar,
   LayoutDashboard,
-  Map,
-  PieChart,
+  List,
+  MessageSquare,
+  Package,
+  Plus,
+  Scissors,
   Settings2,
-  SquareTerminal,
+  User,
 } from "lucide-react";
 
 import { NavMain } from "@/components/admin/layout/nav-main";
@@ -38,92 +38,64 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/admin",
       icon: LayoutDashboard,
     },
     {
       title: "Products",
       url: "#",
-      icon: SquareTerminal,
+      icon: Package,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "All Products",
           url: "#",
+          icon: List,
         },
         {
-          title: "Starred",
+          title: "Add Product",
           url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
+          icon: Plus,
         },
       ],
     },
 
     {
-      title: "Documentation",
+      title: "Services",
       url: "#",
-      icon: BookOpen,
+      icon: Scissors,
       items: [
         {
-          title: "Introduction",
+          title: "All Services",
           url: "#",
+          icon: List,
         },
         {
-          title: "Get Started",
+          title: "Add Service",
           url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          icon: Plus,
         },
       ],
+    },
+    {
+      title: "Users",
+      url: "#",
+      icon: User,
+    },
+    {
+      title: "Reviews",
+      url: "#",
+      icon: MessageSquare,
+    },
+    {
+      title: "Appointment",
+      url: "#",
+      icon: Calendar,
     },
     {
       title: "Settings",
       url: "#",
       icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
-  ],
-  projects: [
-    {
-      name: "Design Engineering",
-      url: "#",
-      icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 };
@@ -131,13 +103,17 @@ const data = {
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+      <SidebarHeader className="bg-primary">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
+            <SidebarMenuButton
+              size="lg"
+              asChild
+              className="bg-slate-100 hover:bg-slate-200"
+            >
               <a href="#">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Command className="size-4" />
+                  <Brush className="size-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-semibold">Glamour Haven</span>
@@ -150,7 +126,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

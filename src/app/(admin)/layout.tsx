@@ -57,7 +57,7 @@ export default function PublicLayout({
             </Breadcrumb>
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className="flex flex-1 flex-col gap-4 md:px-8 px-4 pt-2">
           {children}
           <Toaster position="bottom-right" />
         </div>

@@ -18,6 +18,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export function NavMain({
   items,
@@ -30,15 +31,26 @@ export function NavMain({
     items?: {
       title: string;
       url: string;
+      icon?: LucideIcon;
     }[];
   }[];
 }) {
+  const pathname = usePathname();
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>Platform</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) =>
-          item.items ? (
+        {items.map((item) => {
+          const isActive = item.items
+            ? item.items.some((subItem) => subItem.url === pathname)
+            : item.url === pathname;
+
+          const isSubItemActive = item.items?.some(
+            (subItem) => subItem.url === pathname
+          );
+
+          return item.items ? (
             <Collapsible
               key={item.title}
               asChild
@@ -57,9 +69,17 @@ export function NavMain({
                   <SidebarMenuSub>
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
+                        <SidebarMenuSubButton
+                          asChild
+                          className={`${
+                            isSubItemActive
+                              ? "bg-primary/50 text-primary-foreground"
+                              : ""
+                          } hover:bg-primary/50`}
+                        >
                           <Link href={subItem.url}>
-                            <span>{subItem.title}</span>
+                            {subItem.icon && <subItem.icon />}
+                            <span className="truncate">{subItem.title}</span>
                           </Link>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
@@ -69,14 +89,21 @@ export function NavMain({
               </SidebarMenuItem>
             </Collapsible>
           ) : (
-            <SidebarMenuButton tooltip={item.title} asChild key={item.title}>
+            <SidebarMenuButton
+              tooltip={item.title}
+              asChild
+              key={item.title}
+              className={`${
+                isActive ? "bg-primary text-primary-foreground" : ""
+              } hover:bg-primary/50`}
+            >
               <Link href={item.url}>
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>
               </Link>
             </SidebarMenuButton>
-          )
-        )}
+          );
+        })}
       </SidebarMenu>
     </SidebarGroup>
   );
