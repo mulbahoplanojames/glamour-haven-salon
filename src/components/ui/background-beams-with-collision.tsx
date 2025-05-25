@@ -18,7 +18,7 @@ export const BackgroundBeamsWithCollision = ({
   ) as React.RefObject<HTMLDivElement>;
 
   const beams = Array.from({ length: 30 }, (_, i) => {
-    const baseX = (i % 10) * 200 + Math.floor(Math.random() * 50); // Spread out horizontally
+    const baseX = (i % 10) * 200 + Math.floor(Math.random() * 49); // Spread out horizontally
     const translateOffset = Math.floor(Math.random() * 40); // Small translation offset
     const duration = +(Math.random() * 6 + 2).toFixed(1); // Between 2 and 8 seconds
     const repeatDelay = +(Math.random() * 6 + 1).toFixed(1); // Between 1 and 7 seconds
