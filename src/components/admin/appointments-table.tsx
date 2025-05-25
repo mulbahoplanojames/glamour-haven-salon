@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -19,26 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Calendar,
-  Clock,
-  User,
-  Phone,
-  Mail,
-  Edit,
-  Trash2,
-  Plus,
-} from "lucide-react";
+import { Calendar, Clock, User, Phone, Mail } from "lucide-react";
 import { toast } from "sonner";
 
 interface Appointment {
@@ -127,11 +107,6 @@ export default function AppointmentsTable() {
     useState<Appointment[]>(mockAppointments);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [selectedAppointment, setSelectedAppointment] =
-    useState<Appointment | null>(null);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
-
   const filteredAppointments = appointments.filter((appointment) => {
     const matchesSearch =
       appointment.customerName

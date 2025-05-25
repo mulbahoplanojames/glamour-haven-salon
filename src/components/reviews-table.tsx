@@ -332,7 +332,7 @@ export default function ReviewsTable() {
               {selectedReview?.adminResponse ? "Edit Response" : "Add Response"}
             </DialogTitle>
             <DialogDescription>
-              Respond to {selectedReview?.customerName}'s review
+              Respond to {selectedReview?.customerName}&apos;s review
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">

@@ -33,6 +33,7 @@ export default function SettingsPage() {
       toast("Error", {
         description: "Failed to save settings. Please try again.",
       });
+      console.error("Error saving settings:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -41,14 +42,18 @@ export default function SettingsPage() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-600 mt-1">Configure your salon settings</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+          Settings
+        </h1>
+        <p className="text-gray-600 mt-1 dark:text-gray-400">
+          Configure your salon settings
+        </p>
       </div>
 
       <Card>
         <form onSubmit={handleSubmit}>
-          <Tabs defaultValue="general" className="w-full">
-            <TabsList className="grid grid-cols-4 w-full">
+          <Tabs defaultValue="general" className="w-full px-3">
+            <TabsList className="grid grid-cols-4 w-full ">
               <TabsTrigger value="general">General</TabsTrigger>
               <TabsTrigger value="business">Business</TabsTrigger>
               <TabsTrigger value="booking">Booking</TabsTrigger>

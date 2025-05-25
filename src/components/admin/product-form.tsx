@@ -72,6 +72,7 @@ export default function ProductForm() {
       toast("Error", {
         description: "Something went wrong. Please try again.",
       });
+      console.error("Error submitting form:", error);
     } finally {
       setIsLoading(false);
     }

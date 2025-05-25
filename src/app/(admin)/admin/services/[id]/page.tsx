@@ -1,10 +1,16 @@
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import Link from "next/link"
-import { ChevronLeft } from "lucide-react"
-import ServiceForm from "@/components/admin/service-form"
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
+import ServiceForm from "@/components/admin/service-form";
 
-export default function EditServicePage({ params }: { params: { id: string } }) {
+export default async function EditServicePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+
   return (
     <div>
       <div className="mb-6">
@@ -19,8 +25,8 @@ export default function EditServicePage({ params }: { params: { id: string } }) 
       </div>
 
       <Card className="p-6">
-        <ServiceForm serviceId={params.id} />
+        <ServiceForm serviceId={id} />
       </Card>
     </div>
-  )
+  );
 }

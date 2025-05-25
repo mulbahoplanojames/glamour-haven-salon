@@ -46,11 +46,6 @@ export default function EditProductForm({ productId }: { productId?: string }) {
   const router = useRouter();
 
   const product = products.find((p) => p.id === productId);
-  if (!product && productId) {
-    return (
-      <div className="text-red-500">Product with ID {productId} not found.</div>
-    );
-  }
 
   // Initialize form with default product data for editing
   const form = useForm({
@@ -65,6 +60,12 @@ export default function EditProductForm({ productId }: { productId?: string }) {
       images: product?.images || [],
     },
   });
+
+  if (!product && productId) {
+    return (
+      <div className="text-red-500">Product with ID {productId} not found.</div>
+    );
+  }
 
   async function onSubmit(data: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
@@ -82,6 +83,7 @@ export default function EditProductForm({ productId }: { productId?: string }) {
       toast("Error", {
         description: "Something went wrong. Please try again.",
       });
+      console.error("Error updating product:", error);
     } finally {
       setIsLoading(false);
     }

@@ -1,10 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function BusinessSettings() {
   const [settings, setSettings] = useState({
@@ -14,11 +26,11 @@ export default function BusinessSettings() {
     taxRate: 8.5,
     businessType: "Hair Salon",
     licenseNumber: "HS-2024-001",
-  })
+  });
 
   const handleInputChange = (field: string, value: string | number) => {
-    setSettings((prev) => ({ ...prev, [field]: value }))
-  }
+    setSettings((prev) => ({ ...prev, [field]: value }));
+  };
 
   return (
     <div className="space-y-6 p-6">
@@ -30,33 +42,49 @@ export default function BusinessSettings() {
         <CardContent className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="openingHours">Opening Hours</Label>
+              <Label htmlFor="openingHours" className="pb-2">
+                Opening Hours
+              </Label>
               <Input
                 id="openingHours"
                 value={settings.openingHours}
-                onChange={(e) => handleInputChange("openingHours", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("openingHours", e.target.value)
+                }
               />
             </div>
             <div>
-              <Label htmlFor="timezone">Timezone</Label>
-              <Select value={settings.timezone} onValueChange={(value) => handleInputChange("timezone", value)}>
-                <SelectTrigger>
+              <Label htmlFor="timezone" className="pb-2">
+                Timezone
+              </Label>
+              <Select
+                value={settings.timezone}
+                onValueChange={(value) => handleInputChange("timezone", value)}
+              >
+                <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="America/New_York">Eastern Time</SelectItem>
                   <SelectItem value="America/Chicago">Central Time</SelectItem>
                   <SelectItem value="America/Denver">Mountain Time</SelectItem>
-                  <SelectItem value="America/Los_Angeles">Pacific Time</SelectItem>
+                  <SelectItem value="America/Los_Angeles">
+                    Pacific Time
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="currency">Currency</Label>
-              <Select value={settings.currency} onValueChange={(value) => handleInputChange("currency", value)}>
-                <SelectTrigger>
+              <Label htmlFor="currency" className="pb-2">
+                Currency
+              </Label>
+              <Select
+                value={settings.currency}
+                onValueChange={(value) => handleInputChange("currency", value)}
+              >
+                <SelectTrigger className="w-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -68,36 +96,51 @@ export default function BusinessSettings() {
               </Select>
             </div>
             <div>
-              <Label htmlFor="taxRate">Tax Rate (%)</Label>
+              <Label htmlFor="taxRate" className="pb-2">
+                Tax Rate (%)
+              </Label>
               <Input
                 id="taxRate"
                 type="number"
                 step="0.1"
                 value={settings.taxRate}
-                onChange={(e) => handleInputChange("taxRate", Number.parseFloat(e.target.value))}
+                onChange={(e) =>
+                  handleInputChange(
+                    "taxRate",
+                    Number.parseFloat(e.target.value)
+                  )
+                }
               />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <Label htmlFor="businessType">Business Type</Label>
+              <Label htmlFor="businessType" className="pb-2">
+                Business Type
+              </Label>
               <Input
                 id="businessType"
                 value={settings.businessType}
-                onChange={(e) => handleInputChange("businessType", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("businessType", e.target.value)
+                }
               />
             </div>
             <div>
-              <Label htmlFor="licenseNumber">License Number</Label>
+              <Label htmlFor="licenseNumber" className="pb-2">
+                License Number
+              </Label>
               <Input
                 id="licenseNumber"
                 value={settings.licenseNumber}
-                onChange={(e) => handleInputChange("licenseNumber", e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("licenseNumber", e.target.value)
+                }
               />
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
