@@ -28,6 +28,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import ImageUpload from "./image-upload";
 import { productFormSchema } from "@/schema/zod-schema";
+import products from "@/data/products.json";
 
 const categories = [
   { label: "Shampoo", value: "shampoo" },
@@ -38,21 +39,30 @@ const categories = [
   { label: "Tools", value: "tools" },
 ];
 
-export default function ProductForm() {
+export default function EditProductForm({ productId }: { productId?: string }) {
+  console.log("Editing product with ID:", productId);
+
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  // Initialize form with default values or product data if editing
+  const product = products.find((p) => p.id === productId);
+  if (!product && productId) {
+    return (
+      <div className="text-red-500">Product with ID {productId} not found.</div>
+    );
+  }
+
+  // Initialize form with default product data for editing
   const form = useForm({
     resolver: zodResolver(productFormSchema),
     defaultValues: {
-      name: "",
-      description: "",
-      price: "",
-      category: "",
-      stock: "",
-      featured: false,
-      images: [],
+      name: product?.name,
+      description: product?.description,
+      price: product?.price?.toString(),
+      category: product?.category,
+      stock: product?.unit.toString(),
+      featured: product?.featured || false,
+      images: product?.images || [],
     },
   });
 
@@ -65,8 +75,8 @@ export default function ProductForm() {
 
       console.log("Form submitted:", data);
 
-      toast("Product created", {
-        description: `${data.name} has been added to your products.`,
+      toast("Product Updated", {
+        description: `${data.name} has been updated to your products.`,
       });
     } catch (error) {
       toast("Error", {
@@ -165,6 +175,9 @@ export default function ProductForm() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
+                      <SelectItem value={field.value}>
+                        {categories.find((c) => c.value === field.value)?.label}
+                      </SelectItem>
                       {categories.map((category) => (
                         <SelectItem key={category.value} value={category.value}>
                           {category.label}

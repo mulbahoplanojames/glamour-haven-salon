@@ -63,3 +63,23 @@ export const signInFormSchema = z.object({
       message: "Password must include letters, numbers, and symbols",
     }),
 });
+
+export const productFormSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Product name must be at least 2 characters." }),
+  description: z
+    .string()
+    .min(10, { message: "Description must be at least 10 characters." }),
+  price: z.string().refine((val) => !isNaN(Number(val)), {
+    message: "Price must be a valid number.",
+  }),
+  category: z.string().min(1, { message: "Please select a category." }),
+  stock: z.string().refine((val) => !isNaN(Number(val)), {
+    message: "Stock must be a valid number.",
+  }),
+  featured: z.boolean().default(false),
+  images: z
+    .array(z.string())
+    .min(1, { message: "At least one image is required." }),
+});
