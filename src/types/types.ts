@@ -78,3 +78,17 @@ export interface MatchStyle {
     visitFrequency: string[];
   };
 }
+
+export interface Review {
+  id: string;
+  customerName: string;
+  customerAvatar: string;
+  customerEmail: string;
+  serviceName: string;
+  rating: number;
+  comment: string;
+  date: Date;
+  status: "pending" | "approved" | "rejected";
+  adminResponse?: string;
+  adminResponseDate?: Date;
+}

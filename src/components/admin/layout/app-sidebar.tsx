@@ -66,12 +66,12 @@ const data = {
       items: [
         {
           title: "All Services",
-          url: "#",
+          url: "/admin/services",
           icon: List,
         },
         {
           title: "Add Service",
-          url: "#",
+          url: "/admin/services/new",
           icon: Plus,
         },
       ],
@@ -83,17 +83,17 @@ const data = {
     },
     {
       title: "Reviews",
-      url: "#",
+      url: "/admin/reviews",
       icon: MessageSquare,
     },
     {
       title: "Appointment",
-      url: "#",
+      url: "/admin/appointments",
       icon: Calendar,
     },
     {
       title: "Settings",
-      url: "#",
+      url: "/admin/settings",
       icon: Settings2,
     },
   ],
