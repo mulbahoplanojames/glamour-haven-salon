@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 // import { useCart } from "@/context/cart-context";
@@ -11,6 +11,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
@@ -18,9 +20,12 @@ import { MobileNavbar } from "./mobile-navbar";
 import { useCart } from "@/context/cart-context";
 import { ThemeModeToggle } from "@/components/theme-mode-toggle";
 import { extraNavItems, navigation } from "@/data/nav-data";
+import { deleteCookie, getCookie } from "cookies-next";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [token, setToken] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
   const pathname = usePathname();
   const { items, setIsCartOpen } = useCart();
 
@@ -33,6 +38,20 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const storedToken = getCookie("access_token") as string | undefined;
+    setToken(storedToken);
+    setLoading(false);
+  }, []);
+  // const token = getCookie("access_token");
+  const user = getCookie("user");
+
+  const userRole = user ? JSON.parse(user as string).is_customer : true;
+
+  // console.log("User Role:", userRole);
+  // console.log("token:", token);
+  // console.log("user:", JSON.parse(user as string));
 
   const cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -56,9 +75,7 @@ export default function Navbar() {
             <span>Salon</span>
           </Link>
         </div>
-        <div className="flex lg:hidden">
-          <MobileNavbar />
-        </div>
+
         <div className="hidden lg:flex lg:gap-x-8">
           {navigation.map((item) => (
             <Link
@@ -96,13 +113,15 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 items-center">
-          <ThemeModeToggle />
+        <div className="flex flex-1 justify-end items-center gap-4">
+          <div className="lg:flex hidden">
+            <ThemeModeToggle />
+          </div>
 
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
-            className="relative"
+            className="relative hidden  lg:flex justify-center items-center"
             onClick={() => setIsCartOpen(true)}
           >
             <ShoppingBag className="h-5 w-5" />
@@ -122,12 +141,47 @@ export default function Navbar() {
               )}
             </AnimatePresence>
           </Button>
-          <Button
-            asChild
-            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white cursor-pointer"
-          >
-            <Link href="/sign-in">Sign in</Link>
-          </Button>
+
+          {!loading && token ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <div className="size-10 bg-red-200 rounded-full border-2 border-primary"></div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>
+                  Welcome {userRole ? "Customer" : "Admin"}
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {!userRole && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/admin">Dashboard</Link>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>Profile</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => {
+                    deleteCookie("access_token");
+                    deleteCookie("user");
+                    window.location.reload();
+                  }}
+                >
+                  Logout
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link href="/sign-in">
+              <Button className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white cursor-pointer">
+                Sign in
+              </Button>
+            </Link>
+          )}
+
+          <div className="flex lg:hidden">
+            <MobileNavbar />
+          </div>
         </div>
       </nav>
     </header>

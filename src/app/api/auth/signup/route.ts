@@ -15,12 +15,12 @@ export async function POST(request: NextRequest) {
     // console.log("Received data:", body);
 
     const response = await axios.post(
-      "https://api.example.com/signup",
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URI}/api/sign-up/`,
       {
         email,
         password,
         phone,
-        fullName,
+        full_name: fullName,
       },
       {
         headers: {
@@ -38,12 +38,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json("User already exists", { status: 400 });
     }
     if (response.status === 500) {
-      return NextResponse.json("Internal Server Error", { status: 500 });
+      return NextResponse.json("Internal Server Error from api", {
+        status: 500,
+      });
     }
 
     return NextResponse.json(data, { status: response.status });
   } catch (error) {
     console.error("Error in sign-up route:", error);
-    return NextResponse.json("Internal Server Error", { status: 500 });
+    return NextResponse.json("Internal Server Error from api", { status: 500 });
   }
 }

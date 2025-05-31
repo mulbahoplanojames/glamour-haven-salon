@@ -19,9 +19,12 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { getCookie } from "cookies-next";
 
 export default function SignUpPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
 
   const form = useForm({
     resolver: zodResolver(signUpFormSchema),
@@ -34,24 +37,26 @@ export default function SignUpPage() {
   });
 
   async function onSubmit(values: z.infer<typeof signUpFormSchema>) {
-    console.log(values);
+    // console.log(values);
 
     try {
       setIsSubmitting(true);
 
-      const response = await await axios.post(`/api/auth/signup`, {
+      const response = await axios.post(`/api/auth/signup`, {
         fullName: values.fullName,
         email: values.email,
         password: values.password,
         phone: values.phone,
       });
+
       const data = await response.data;
-      console.log("Data:", data);
+      // console.log("Data:", data);
       if (response.status === 201 || response.status === 200) {
         console.log("Signup successful");
         toast.success("Account created successfully", {
           description: "You can now log in to your account.",
         });
+        router.push("/sign-in");
       }
 
       return data;

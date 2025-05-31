@@ -20,9 +20,12 @@ import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
 import { Home } from "lucide-react";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(signInFormSchema),
     defaultValues: {
@@ -32,6 +35,10 @@ export default function LoginPage() {
   });
 
   async function onSubmit(values: z.infer<typeof signInFormSchema>) {
+    const user = getCookie("user");
+    const userRole = user ? JSON.parse(user as string).is_customer : true;
+    // console.log("User Role:", userRole);
+
     try {
       setIsSubmitting(true);
       const { email, password } = values;
@@ -54,7 +61,12 @@ export default function LoginPage() {
         toast.success("Sign-in successful", {
           description: "Welcome back!",
         });
-        // Handle successful sign-in (redirect to dashboard)
+
+        if (!userRole) {
+          router.push("/");
+        } else {
+          router.push("/admin");
+        }
       }
 
       return data;
