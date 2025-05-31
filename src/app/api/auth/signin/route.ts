@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
       );
     }
     // console.log("Access token:", access);
-    return NextResponse.json(response.data, {
+    return NextResponse.json(data, {
       status: 201,
     });
   } catch (error) {
