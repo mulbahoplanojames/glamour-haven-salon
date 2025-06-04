@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -32,14 +32,33 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
-import services from "@/data/services.json";
+// import services from "@/data/services.json";
 import { stylists, timeSlots } from "@/data/data";
 import { bookingFormSchema } from "@/schema/zod-schema";
+import { getCookie } from "cookies-next/client";
+import axios from "axios";
+import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
+import { handleFetchServices } from "@/utils/helper";
+import { Service } from "@/types/types";
 
 export default function BookingForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [token, setToken] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const { data: services } = useQuery({
+    queryKey: ["services"],
+    queryFn: handleFetchServices,
+  });
+
+  useEffect(() => {
+    const storedToken = getCookie("access_token") as string | undefined;
+    setToken(storedToken);
+    setLoading(false);
+  }, []);
 
   const defaultServiceId = searchParams.get("service");
 
@@ -49,23 +68,58 @@ export default function BookingForm() {
       service: defaultServiceId || "",
       stylist: "",
       notes: "",
+      date: new Date(),
+      time: "",
     },
   });
+
+  // Getting the user from the cookies
+  const user = getCookie("user");
 
   async function onSubmit(values: z.infer<typeof bookingFormSchema>) {
     setIsSubmitting(true);
 
+    console.log("Form submitted:", values);
+
     try {
-      // In a real app, this would send the data to your API
-      console.log(values);
+      if (loading && !token) {
+        router.push("/sign-in");
+        return;
+      }
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const { service, stylist, notes, date, time } = values;
 
-      // Redirect to confirmation page
-      router.push("/booking/confirmation");
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URI}/book-appointment/`,
+        {
+          service,
+          stylist,
+          special_request: notes,
+          date: format(date, "yyyy-MM-dd"),
+          time,
+          user: JSON.parse(user as string).full_name,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      toast.success("Service Book Successful", {
+        description: `Hi, ${
+          user && JSON.parse(user as string).full_name
+        } your service as been book successfully`,
+      });
+
+      const data = await response.data;
+
+      return data;
     } catch (error) {
       console.error("Booking failed:", error);
+      toast.error("Booking Failed", {
+        description: `Something went wrong. Please try again.`,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -87,11 +141,14 @@ export default function BookingForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {services.map((service) => (
-                    <SelectItem key={service.id} value={service.id}>
-                      {service.name} - ${service.price.toFixed(2)}
-                    </SelectItem>
-                  ))}
+                  {services &&
+                    Array.isArray(services) &&
+                    services.length > 0 &&
+                    services.map((service: Service) => (
+                      <SelectItem key={service.id} value={service.id}>
+                        {service.name} - ${Number(service.price).toFixed(2)}
+                      </SelectItem>
+                    ))}
                 </SelectContent>
               </Select>
               <FormDescription>
@@ -116,7 +173,7 @@ export default function BookingForm() {
                 </FormControl>
                 <SelectContent>
                   {stylists.map((stylist) => (
-                    <SelectItem key={stylist.id} value={stylist.id}>
+                    <SelectItem key={stylist.id} value={stylist.name}>
                       {stylist.name}
                     </SelectItem>
                   ))}

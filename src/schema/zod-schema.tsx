@@ -10,9 +10,11 @@ export const bookingFormSchema = z.object({
   date: z.date({
     message: "Please select a date",
   }),
-  time: z.string({
-    message: "Please select a time",
-  }),
+  time: z
+    .string({
+      message: "Please select a time",
+    })
+    .min(1, { message: "Please select a time" }),
   notes: z.string().optional(),
 });
 
@@ -79,9 +81,7 @@ export const productFormSchema = z.object({
     message: "Stock must be a valid number.",
   }),
   featured: z.boolean().default(false),
-  images: z
-    .array(z.string())
-    .min(1, { message: "At least one image is required." }),
+  image: z.union([z.string(), z.instanceof(File)]).optional(),
 });
 
 export const serviceFormSchema = z.object({
@@ -94,12 +94,7 @@ export const serviceFormSchema = z.object({
   price: z.string().refine((val) => !isNaN(Number(val)), {
     message: "Price must be a valid number.",
   }),
-  duration: z.string().refine((val) => !isNaN(Number(val)), {
-    message: "Duration must be a valid number.",
-  }),
   category: z.string().min(1, { message: "Please select a category." }),
   featured: z.boolean().default(false),
-  images: z
-    .array(z.string())
-    .min(1, { message: "At least one image is required." }),
+  image: z.union([z.string(), z.instanceof(File)]).optional(),
 });

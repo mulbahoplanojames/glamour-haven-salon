@@ -21,6 +21,7 @@ import { useCart } from "@/context/cart-context";
 import { ThemeModeToggle } from "@/components/theme-mode-toggle";
 import { extraNavItems, navigation } from "@/data/nav-data";
 import { deleteCookie, getCookie } from "cookies-next";
+import Image from "next/image";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -145,7 +146,14 @@ export default function Navbar() {
           {!loading && token ? (
             <DropdownMenu>
               <DropdownMenuTrigger>
-                <div className="size-10 bg-red-200 rounded-full border-2 border-primary"></div>
+                <div className="size-10  rounded-full border-2 border-primary relative overflow-hidden">
+                  <Image
+                    src="/user-avatar.jpg"
+                    alt="User Avatar"
+                    className="object-cover w-full h-full"
+                    fill
+                  />
+                </div>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>

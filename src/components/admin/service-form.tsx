@@ -26,8 +26,8 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import ImageUpload from "./image-upload";
 import { serviceFormSchema } from "@/schema/zod-schema";
+import axios from "axios";
 
 const categories = [
   { label: "Haircut", value: "haircut" },
@@ -49,27 +49,48 @@ export default function ServiceForm({ serviceId }: { serviceId?: string }) {
       name: "",
       description: "",
       price: "",
-      duration: "",
       category: "",
       featured: false,
-      images: [],
+      image: "",
     },
   });
 
-  async function onSubmit(data: z.infer<typeof serviceFormSchema>) {
+  async function onSubmit(value: z.infer<typeof serviceFormSchema>) {
     setIsLoading(true);
 
-    try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+    // const { name, description, price, category, featured, image } = value;
 
-      console.log("Form submitted:", data);
+    try {
+      const formData = new FormData();
+      formData.append("name", value.name);
+      formData.append("description", value.description);
+      formData.append("price", value.price);
+      formData.append("category", value.category);
+      formData.append("featured", String(value.featured));
+      if (value.image) {
+        formData.append("image", value.image);
+      }
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URI}/add-service/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const data = await response.data;
 
       toast("Service created", {
-        description: `${data.name} has been added to your services.`,
+        description: `${value.name} has been added to your services.`,
       });
 
+      form.reset();
+
       router.push("/admin/services");
+      return data;
     } catch (error) {
       toast("Error", {
         description: "Something went wrong. Please try again.",
@@ -117,40 +138,24 @@ export default function ServiceForm({ serviceId }: { serviceId?: string }) {
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="price"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Price ($)</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        step="0.01"
-                        placeholder="0.00"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="duration"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Duration (minutes)</FormLabel>
-                    <FormControl>
-                      <Input type="number" placeholder="60" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="price"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Price ($)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      step="0.01"
+                      placeholder="0.00"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
@@ -207,17 +212,20 @@ export default function ServiceForm({ serviceId }: { serviceId?: string }) {
           <div>
             <FormField
               control={form.control}
-              name="images"
-              render={({ field }) => (
+              name="image"
+              render={({ field: { onChange, value, ...field } }) => (
                 <FormItem>
                   <FormLabel>Service Images</FormLabel>
                   <FormControl>
-                    <ImageUpload
-                      value={field.value}
-                      onChange={(urls) => field.onChange(urls)}
-                      onRemove={(url) =>
-                        field.onChange(field.value.filter((val) => val !== url))
-                      }
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      className="block w-full h-12  text-sm text-slate-500 file:mr-4 file:py-4 file:px-16 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-200"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        onChange(file);
+                      }}
+                      {...field}
                     />
                   </FormControl>
                   <FormDescription>

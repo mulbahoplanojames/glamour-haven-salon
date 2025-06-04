@@ -28,6 +28,7 @@ import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
 import ImageUpload from "./image-upload";
 import { productFormSchema } from "@/schema/zod-schema";
+import axios from "axios";
 
 const categories = [
   { label: "Shampoo", value: "shampoo" },
@@ -52,22 +53,43 @@ export default function ProductForm() {
       category: "",
       stock: "",
       featured: false,
-      images: [],
+      image: "",
     },
   });
 
-  async function onSubmit(data: z.infer<typeof productFormSchema>) {
+  async function onSubmit(value: z.infer<typeof productFormSchema>) {
     setIsLoading(true);
 
     try {
-      // Simulate API call for now
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const formData = new FormData();
+      formData.append("name", value.name);
+      formData.append("description", value.description);
+      formData.append("price", value.price);
+      formData.append("category", value.category);
+      formData.append("stock", value.stock);
+      formData.append("featured", String(value.featured));
+      if (value.image) {
+        formData.append("image", value.image);
+      }
 
-      console.log("Form submitted:", data);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_API_URI}/product/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      const data = await response.data;
+
+      // console.log("Form submitted:", data);
 
       toast("Product created", {
         description: `${data.name} has been added to your products.`,
       });
+      return data;
     } catch (error) {
       toast("Error", {
         description: "Something went wrong. Please try again.",
@@ -205,21 +227,24 @@ export default function ProductForm() {
           <div>
             <FormField
               control={form.control}
-              name="images"
-              render={({ field }) => (
+              name="image"
+              render={({ field: { onChange, value, ...field } }) => (
                 <FormItem>
-                  <FormLabel>Product Images</FormLabel>
+                  <FormLabel>Service Images</FormLabel>
                   <FormControl>
-                    <ImageUpload
-                      value={field.value}
-                      onChange={(urls) => field.onChange(urls)}
-                      onRemove={(url) =>
-                        field.onChange(field.value.filter((val) => val !== url))
-                      }
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      className="block w-full h-12  text-sm text-slate-500 file:mr-4 file:py-4 file:px-16 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-200"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        onChange(file);
+                      }}
+                      {...field}
                     />
                   </FormControl>
                   <FormDescription>
-                    Upload product images. You can upload multiple images.
+                    Upload service images. You can upload multiple images.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>

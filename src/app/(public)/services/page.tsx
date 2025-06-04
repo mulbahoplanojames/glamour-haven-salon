@@ -10,8 +10,11 @@ import {
 import { faq } from "@/data/data";
 import ServiceCard from "@/components/service-card";
 import Hero from "@/components/hero";
+// import { handleFetchServices } from "@/utils/helper";
+// import { ServiceType } from "@/types/types";
 
-const Services = () => {
+const Services = async () => {
+  // const services = await handleFetchServices();
   const categories = [...new Set(services.map((service) => service.category))];
 
   const getCategoryIcon = (category: string) => {
@@ -28,6 +31,7 @@ const Services = () => {
         return <Scissors className="h-4 w-4 mr-2" />;
     }
   };
+
   return (
     <>
       <Hero
@@ -39,7 +43,7 @@ const Services = () => {
       />
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <Tabs defaultValue={categories[0]} className="w-full ">
+          <Tabs defaultValue={categories[0] || "Haircuts"} className="w-full ">
             <TabsList className=" flex flex-wrap justify-center gap-4 mb-12 mx-auto">
               {categories.map((category) => (
                 <TabsTrigger

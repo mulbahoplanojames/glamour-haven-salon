@@ -32,6 +32,16 @@ export interface Service {
   image: string;
 }
 
+export interface ServiceType {
+  id: string;
+  name: string;
+  category: string;
+  description: number;
+  price: number;
+  featured: boolean;
+  image: string;
+}
+
 export interface Stylist {
   id: string;
   name: string;
