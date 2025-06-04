@@ -9,19 +9,13 @@ export type CartItem = {
   product: Product;
   quantity: number;
   size?: string;
-  color?: string;
 };
 
 type CartContextType = {
   items: CartItem[];
-  addToCart: (product: Product, size?: string, color?: string) => void;
-  removeFromCart: (productId: string, size?: string, color?: string) => void;
-  updateQuantity: (
-    productId: string,
-    quantity: number,
-    size?: string,
-    color?: string
-  ) => void;
+  addToCart: (product: Product, size?: string) => void;
+  removeFromCart: (productId: string, size?: string) => void;
+  updateQuantity: (productId: string, quantity: number, size?: string) => void;
   clearCart: () => void;
   totalItems: number;
   totalPrice: number;
@@ -63,43 +57,31 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   // Add product to cart
-  const addToCart = (product: Product, size?: string, color?: string) => {
+  const addToCart = (product: Product) => {
     setItems((prevItems) => {
       // Find if this product with the same size already exists in cart
       const existingItem = prevItems.find(
-        (item) =>
-          item.product.id === product.id &&
-          (size ? item.size === size : !item.size) &&
-          (color ? item.color === color : !item.color)
+        (item) => item.product.id === product.id
       );
 
       if (existingItem) {
         // Increase quantity if product already in cart
         return prevItems.map((item) =>
-          item.product.id === product.id &&
-          (size ? item.size === size : !item.size) &&
-          (color ? item.color === color : !item.color)
+          item.product.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
         // Add new product to cart
-        return [...prevItems, { product, quantity: 1, size, color }];
+        return [...prevItems, { product, quantity: 1 }];
       }
     });
   };
 
   // Remove product from cart
-  const removeFromCart = (productId: string, size?: string, color?: string) => {
+  const removeFromCart = (productId: string) => {
     setItems((prevItems) =>
-      prevItems.filter(
-        (item) =>
-          !(
-            item.product.id === productId &&
-            (size ? item.size === size : !item.size) &&
-            (color ? item.color === color : !item.color)
-          )
-      )
+      prevItems.filter((item) => !(item.product.id === productId))
     );
   };
 
@@ -107,21 +89,16 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const updateQuantity = (
     productId: string,
     quantity: number,
-    size?: string,
-    color?: string
+    size?: string
   ) => {
     if (quantity <= 0) {
-      removeFromCart(productId, size, color);
+      removeFromCart(productId);
       return;
     }
 
     setItems((prevItems) =>
       prevItems.map((item) =>
-        item.product.id === productId &&
-        (size ? item.size === size : !item.size) &&
-        (color ? item.color === color : !item.color)
-          ? { ...item, quantity }
-          : item
+        item.product.id === productId ? { ...item, quantity } : item
       )
     );
   };

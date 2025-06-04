@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 interface ProductImageProps {
-  product: { name: string };
+  product: { name: string; image: string };
   allImages: string[];
   currentImageIndex: number;
   handleThumbnailClick: (index: number) => void;
@@ -19,7 +19,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
       <div>
         <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
           <Image
-            src={allImages[currentImageIndex] || "/placeholder.svg"}
+            src={product.image || "/placeholder.svg"}
             alt={`${product.name} - View ${currentImageIndex + 1}`}
             width={600}
             height={600}
@@ -27,7 +27,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
           />
         </div>
         <div className="grid grid-cols-6 gap-4">
-          {allImages.map((image, index) => (
+          {/* {allImages.map((image, index) => (
             <div
               key={index}
               className={`aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity ${
@@ -43,7 +43,7 @@ const ProductImage: React.FC<ProductImageProps> = ({
                 className="w-full h-full object-scale"
               />
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </>

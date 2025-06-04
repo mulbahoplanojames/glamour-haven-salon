@@ -24,12 +24,21 @@ import {
 } from "@/components/ui/select";
 import { motion } from "framer-motion";
 import { Product } from "@/types/product-type";
-import products from "@/data/products.json";
+// import products from "@/data/products.json";
 import ProductCard from "@/components/products/product-card";
 import Hero from "@/components/hero";
 import { Slider } from "@/components/ui/slider";
+import { useQuery } from "@tanstack/react-query";
+import { handleFetchProducts } from "@/utils/helper";
 
 export default function ProductsPage() {
+  const { data: products = [] } = useQuery<Product[]>({
+    queryKey: ["products"],
+    queryFn: handleFetchProducts,
+  });
+
+  // console.log("Products", products);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [sortBy, setSortBy] = useState("featured");
@@ -43,7 +52,9 @@ export default function ProductsPage() {
   // Get unique categories
   const categories = [
     "all",
-    ...Array.from(new Set(products.map((product) => product.category))),
+    ...Array.from(
+      new Set(products.map((product: Product) => product.category))
+    ),
   ];
 
   // Filter products based on all criteria
@@ -53,31 +64,31 @@ export default function ProductsPage() {
     // Search term filter
     if (searchTerm) {
       result = result.filter(
-        (product) =>
+        (product: Product) =>
           product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.description
-            .toLowerCase()
+          product
+            ?.description!.toLowerCase()
             .includes(searchTerm.toLowerCase()) ||
-          product.brand.toLowerCase().includes(searchTerm.toLowerCase())
+          product?.brand!.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     // Category filter
     if (selectedCategory !== "all") {
       result = result.filter(
-        (product) => product.category === selectedCategory
+        (product: Product) => product.category === selectedCategory
       );
     }
 
     // Price range filter
     result = result.filter(
-      (product) =>
+      (product: Product) =>
         product.price >= priceRange[0] && product.price <= priceRange[1]
     );
 
     // Featured filter
     if (showFeatured) {
-      result = result.filter((product) => product.featured);
+      result = result.filter((product: Product) => product.featured);
     }
 
     // Sort products

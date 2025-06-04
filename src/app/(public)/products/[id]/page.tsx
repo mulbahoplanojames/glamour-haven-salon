@@ -1,3 +1,4 @@
+import { handleFetchProducts } from "@/utils/helper";
 import ProductClient from "./_components/productClient";
 
 const SingleProductPage = async ({

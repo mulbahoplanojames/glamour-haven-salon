@@ -20,7 +20,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     <motion.div variants={item}>
       <div key={product.id} className="group relative ">
         <div className="relative aspect-square overflow-hidden rounded-lg bg-gray-100">
-          <Image
+          <img
             src={product.image || "/placeholder.svg"}
             alt={product.name}
             width={300}
@@ -60,7 +60,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 </p>
               </div>
               <p className="text-sm font-medium text-gray-900 dark:text-white">
-                ${product.price.toFixed(2)}
+                ${Number(product.price).toFixed(2)}
               </p>
             </div>
           </Link>

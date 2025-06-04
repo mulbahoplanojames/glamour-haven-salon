@@ -1,7 +1,6 @@
 "use client";
 
 import { useCart } from "@/context/cart-context";
-import products from "@/data/products.json";
 import { getRelatedProducts } from "@/lib/utils";
 import {
   ChevronRight,
@@ -18,8 +17,25 @@ import { useState, useEffect } from "react";
 import RelatedProducts from "./RelatedProducts";
 import ProductImage from "./ProductImage";
 import ProductQuantity from "./ProductQuantity";
-import SizeSelection from "./SizeSelection";
-import ColorSelection from "./ColorSelection";
+// import SizeSelection from "./SizeSelection";
+// import ColorSelection from "./ColorSelection";
+import { Product } from "@/types/product-type";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+// import products from "@/data/products.json";
+
+export const handleFetchProducts = async ({ id }: { id: string }) => {
+  try {
+    const response = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_API_URI}/one-product/${id}/`
+    );
+    const data = await response.data;
+
+    return data;
+  } catch (error) {
+    console.log("Error fetching Products", error);
+  }
+};
 
 const ProductClient = ({ params }: { params: { id: string } }) => {
   const {
@@ -30,16 +46,25 @@ const ProductClient = ({ params }: { params: { id: string } }) => {
     removeFromCart,
     items,
   } = useCart();
-  const product = products.find((product) => product.id === params.id);
+
+  const { id } = params;
+  const { data: product } = useQuery<Product>({
+    queryKey: ["product", id],
+    queryFn: () => handleFetchProducts({ id }),
+  });
+
+  console.log("Product : " + product);
+
   const relatedProducts = product ? getRelatedProducts(product) : [];
 
   // State for selected size, quantity, favorite status, and current image
   const [selectedSize, setSelectedSize] = useState<string | undefined>(
     product?.sizes && product.sizes.length > 0 ? product.sizes[0] : undefined
   );
-  const [selectedColor, setSelectedColor] = useState<string | undefined>(
-    product?.colors && product.colors.length > 0 ? product.colors[0] : undefined
-  );
+
+  // const [selectedColor, setSelectedColor] = useState<string | undefined>(
+  //   product?.colors && product.colors.length > 0 ? product.colors[0] : undefined
+  // );
   const [quantity, setQuantity] = useState(1);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isInCart, setIsInCart] = useState(false);
@@ -54,8 +79,8 @@ const ProductClient = ({ params }: { params: { id: string } }) => {
     const cartItem = items.find(
       (item) =>
         item.product.id === product.id &&
-        (selectedSize ? item.size === selectedSize : !item.size) &&
-        (selectedColor ? item.color === selectedColor : !item.color)
+        (selectedSize ? item.size === selectedSize : !item.size)
+      // (selectedColor ? item.color === selectedColor : !item.color)
     );
 
     if (cartItem) {
@@ -65,7 +90,7 @@ const ProductClient = ({ params }: { params: { id: string } }) => {
       setIsInCart(false);
       setCartQuantity(0);
     }
-  }, [items, product, selectedSize, selectedColor]);
+  }, [items, product, selectedSize]);
 
   // Update quantity state when size or color changes or cart updates
   useEffect(() => {
@@ -74,20 +99,20 @@ const ProductClient = ({ params }: { params: { id: string } }) => {
     } else {
       setQuantity(0);
     }
-  }, [isInCart, cartQuantity, selectedSize, selectedColor]);
+  }, [isInCart, cartQuantity, selectedSize]);
 
   const handleUpdateQuantity = (newQuantity: number) => {
     if (newQuantity <= 0) {
       // Remove from cart if quantity is 0
       if (product) {
-        removeFromCart(product.id, selectedSize, selectedColor);
+        removeFromCart(product.id, selectedSize);
       }
       setIsInCart(false);
       setQuantity(1);
     } else {
       // Update quantity in cart
       if (product) {
-        updateQuantity(product.id, newQuantity, selectedSize, selectedColor);
+        updateQuantity(product.id, newQuantity, selectedSize);
       }
       setQuantity(newQuantity);
     }
@@ -183,17 +208,17 @@ const ProductClient = ({ params }: { params: { id: string } }) => {
             </p>
 
             {/* Size Selection */}
-            <SizeSelection
+            {/* <SizeSelection
               product={product}
               selectedSize={selectedSize}
               setSelectedSize={setSelectedSize}
-            />
+            /> */}
 
-            <ColorSelection
+            {/* <ColorSelection
               product={product}
-              selectedColor={selectedColor}
-              setSelectedColor={setSelectedColor}
-            />
+              // selectedColor={selectedColor}
+              // setSelectedColor={setSelectedColor}
+            /> */}
             {/* Quantity */}
             <ProductQuantity
               isInCart={isInCart}
@@ -208,7 +233,7 @@ const ProductClient = ({ params }: { params: { id: string } }) => {
                 onClick={
                   isInCart
                     ? () => handleUpdateQuantity(quantity)
-                    : () => addToCart(product, selectedSize, selectedColor)
+                    : () => addToCart(product, selectedSize)
                 }
                 className={`flex-1 py-3 px-6 rounded-md flex items-center justify-center gap-2 transition-colors ${
                   isInCart
